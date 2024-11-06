@@ -1,8 +1,15 @@
+using Calculator.UI;
+using Calculator.UI.ChoiceReader;
 using Calculator.UI.Menu;
+using Calculator.UI.OperandSource;
 
 namespace Calculator;
 
-public class Calculator(MainMenu mainMenu, IMenuReader menuReader)
+public class Calculator(
+    MainMenu mainMenu,
+    IChoiceReader choiceReader,
+    OperandSourceSelection operandSourceSelection,
+    IKeyAwaiter keyAwaiter)
 {
     private ResultHistory _resultHistory = new();
 
@@ -13,7 +20,7 @@ public class Calculator(MainMenu mainMenu, IMenuReader menuReader)
         {
             Console.Clear();
             MenuRenderer.Render(mainMenu);
-            var menuChoice = menuReader.GetChoice();
+            var menuChoice = choiceReader.GetChoice<MenuChoices>();
             switch (menuChoice)
             {
                 case MenuChoices.Quit:
@@ -23,16 +30,26 @@ public class Calculator(MainMenu mainMenu, IMenuReader menuReader)
                     RunCalculation();
                     break;
                 case MenuChoices.ClearHistory:
-                    _resultHistory.Clear();
+                    ClearHistory();
                     break;
             }
-        } while (shouldQuit);
+        } while (!shouldQuit);
 
         Console.WriteLine("Thank you for using the Calculator!");
     }
 
     private void RunCalculation()
     {
-        _resultHistory.Add(1);
+        Console.Clear();
+        OperandSourceSelectionRenderer.Render(operandSourceSelection);
+        var operandSourceChoice = choiceReader.GetChoice<OperandSources>();
+    }
+
+    private void ClearHistory()
+    {
+        Console.Clear();
+        _resultHistory.Clear();
+        Console.WriteLine("History cleared. Press any key to continue...");
+        keyAwaiter.Wait();
     }
 }

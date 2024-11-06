@@ -1,6 +1,8 @@
 ﻿using Calculator.ConsoleWrapper;
 using Calculator.UI;
+using Calculator.UI.ChoiceReader;
 using Calculator.UI.Menu;
+using Calculator.UI.OperandSource;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -9,7 +11,9 @@ var builder = Host.CreateDefaultBuilder()
     {
         services.AddSingleton<MainMenu>();
         services.AddSingleton<IConsoleWrapper, ConsoleWrapper>();
-        services.AddSingleton<IMenuReader, ConsoleMenuReader>();
+        services.AddSingleton<IChoiceReader, ConsoleChoiceReader>();
+        services.AddSingleton<OperandSourceSelection>();
+        services.AddSingleton<IKeyAwaiter, ConsoleKeyAwaiter>();
     });
 var host = builder.Build();
 
