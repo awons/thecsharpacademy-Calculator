@@ -1,7 +1,9 @@
+using Calculator.Logic;
 using Calculator.UI;
 using Calculator.UI.ChoiceReader;
 using Calculator.UI.Menu;
 using Calculator.UI.OperandSource;
+using Calculator.UI.Operation;
 
 namespace Calculator;
 
@@ -9,7 +11,8 @@ public class Calculator(
     MainMenu mainMenu,
     IChoiceReader choiceReader,
     OperandSourceSelection operandSourceSelection,
-    IKeyAwaiter keyAwaiter)
+    IKeyAwaiter keyAwaiter,
+    OperationSelection operationSelection)
 {
     private ResultHistory _resultHistory = new();
 
@@ -43,6 +46,31 @@ public class Calculator(
         Console.Clear();
         OperandSourceSelectionRenderer.Render(operandSourceSelection);
         var operandSourceChoice = choiceReader.GetChoice<OperandSources>();
+
+        var leftOperand = 5.0;
+
+        OperationSelectionRenderer.Render(operationSelection);
+        var operationChoice = choiceReader.GetChoice<OperationChoice>();
+        keyAwaiter.Wait();
+
+        var operationType = OperationTypes.Addition;
+
+        double result;
+        if (operationType.RequiresTwoOperands())
+        {
+            OperandSourceSelectionRenderer.Render(operandSourceSelection);
+            var secondOperandSourceChoice = choiceReader.GetChoice<OperandSources>();
+
+            var rightOperand = 7.0;
+            result = Operation.Perform(operationType, leftOperand, rightOperand);
+        }
+        else
+        {
+            result = Operation.Perform(operationType, leftOperand);
+        }
+
+        Console.WriteLine(result);
+        keyAwaiter.Wait();
     }
 
     private void ClearHistory()
