@@ -61,8 +61,9 @@ public class Calculator(
         {
             OperandSourceSelectionRenderer.Render(operandSourceSelection);
             var secondOperandSourceChoice = choiceReader.GetChoice<OperandSources>();
+            var rightOperandReader = operandSourceReaderFactory.Create(secondOperandSourceChoice);
 
-            var rightOperand = 7.0;
+            var rightOperand = rightOperandReader.ReadOperand();
             result = Operation.Perform(operationType, leftOperand, rightOperand);
         }
         else
