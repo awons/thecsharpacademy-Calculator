@@ -2,7 +2,7 @@ using Calculator.ConsoleWrapper;
 
 namespace Calculator.UI.OperandSource.ConsoleReader;
 
-public class ConsoleOperandReader(IConsoleWrapper consoleWrapper) : IOperandReader
+public class ConsoleOperandReader(IConsoleWrapper consoleWrapper, IKeyAwaiter keyAwaiter) : IOperandReader
 {
     public double ReadOperand()
     {
@@ -11,13 +11,14 @@ public class ConsoleOperandReader(IConsoleWrapper consoleWrapper) : IOperandRead
         var positionTop = Console.CursorTop;
         while (true)
         {
-            double operand;
-            if (!double.TryParse(consoleWrapper.ReadLine(), out operand))
+            if (!double.TryParse(consoleWrapper.ReadLine(), out var operand))
             {
                 Console.WriteLine("Invalid operand. Press any key to continue.");
+                keyAwaiter.Wait();
                 Console.SetCursorPosition(positionLeft, positionTop);
-                Console.Write(new string(' ', Console.WindowWidth - 1));
+                Console.Write(new string(' ', Console.WindowWidth));
                 Console.SetCursorPosition(positionLeft, positionTop);
+                continue;
             }
 
             return operand;
