@@ -19,5 +19,5 @@ var builder = Host.CreateDefaultBuilder()
     });
 var host = builder.Build();
 
-var calculator = ActivatorUtilities.CreateInstance<Calculator.Calculator>(host.Services);
+var calculator = ActivatorUtilities.CreateInstance<Calculator.Application.Calculator>(host.Services);
 calculator.Run();

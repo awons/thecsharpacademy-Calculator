@@ -5,7 +5,7 @@ using Calculator.UI.Menu;
 using Calculator.UI.OperandSource;
 using Calculator.UI.Operation;
 
-namespace Calculator;
+namespace Calculator.Application;
 
 public class Calculator(
     MainMenu mainMenu,
@@ -51,9 +51,8 @@ public class Calculator(
 
         OperationSelectionRenderer.Render(operationSelection);
         var operationChoice = choiceReader.GetChoice<OperationChoice>();
-        keyAwaiter.Wait();
 
-        var operationType = OperationTypes.Addition;
+        var operationType = OperationUiToLogicMapper.Map(operationChoice);
 
         double result;
         if (operationType.RequiresTwoOperands())

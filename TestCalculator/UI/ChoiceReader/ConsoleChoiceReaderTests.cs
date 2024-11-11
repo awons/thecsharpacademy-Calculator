@@ -4,7 +4,7 @@ using Calculator.UI.Menu;
 using FluentAssertions;
 using NSubstitute;
 
-namespace TestCalculator.Calculator.UI.ChoiceReader;
+namespace TestCalculator.UI.ChoiceReader;
 
 public class ConsoleChoiceReaderTests
 {
