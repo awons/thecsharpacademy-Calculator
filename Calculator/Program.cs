@@ -3,6 +3,7 @@ using Calculator.UI;
 using Calculator.UI.ChoiceReader;
 using Calculator.UI.Menu;
 using Calculator.UI.OperandSource;
+using Calculator.UI.OperandSource.ConsoleReader;
 using Calculator.UI.Operation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +17,7 @@ var builder = Host.CreateDefaultBuilder()
         services.AddSingleton<OperandSourceSelection>();
         services.AddSingleton<IKeyAwaiter, ConsoleKeyAwaiter>();
         services.AddSingleton<OperationSelection>();
+        services.AddOperandSourceReaderFactory();
     });
 var host = builder.Build();
 

@@ -12,7 +12,8 @@ public class Calculator(
     IChoiceReader choiceReader,
     OperandSourceSelection operandSourceSelection,
     IKeyAwaiter keyAwaiter,
-    OperationSelection operationSelection)
+    OperationSelection operationSelection,
+    OperandSourceReaderFactory operandSourceReaderFactory)
 {
     private ResultHistory _resultHistory = new();
 
@@ -46,8 +47,9 @@ public class Calculator(
         Console.Clear();
         OperandSourceSelectionRenderer.Render(operandSourceSelection);
         var operandSourceChoice = choiceReader.GetChoice<OperandSources>();
+        var leftOperandReader = operandSourceReaderFactory.Create(operandSourceChoice);
 
-        var leftOperand = 5.0;
+        var leftOperand = leftOperandReader.ReadOperand();
 
         OperationSelectionRenderer.Render(operationSelection);
         var operationChoice = choiceReader.GetChoice<OperationChoice>();
