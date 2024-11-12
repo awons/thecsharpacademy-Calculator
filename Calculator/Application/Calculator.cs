@@ -89,11 +89,21 @@ public class Calculator(
         _resultHistory.Add(result);
 
         if (operationType.RequiresTwoOperands())
-            Console.WriteLine("Your result: {0:0.##} {1} {2:0.##} = {3:0.##}", leftOperand,
-                OperationTypeToPresentationMapper.Map(operationType), rightOperand, result);
+        {
+            if (double.IsNaN(result))
+                Console.WriteLine("{0:0.##} {1} {2:0.##} - This operation will result in an error");
+            else
+                Console.WriteLine("Your result: {0:0.##} {1} {2:0.##} = {3:0.##}", leftOperand,
+                    OperationTypeToPresentationMapper.Map(operationType), rightOperand, result);
+        }
         else
-            Console.WriteLine("Your result: {1} {0:0.##} = {2:0.##}", leftOperand,
-                OperationTypeToPresentationMapper.Map(operationType), result);
+        {
+            if (double.IsNaN(result))
+                Console.WriteLine("{1} {0:0.##} - This operation will result in an error");
+            else
+                Console.WriteLine("Your result: {1} {0:0.##} = {2:0.##}", leftOperand,
+                    OperationTypeToPresentationMapper.Map(operationType), result);
+        }
 
         keyAwaiter.Wait();
     }
