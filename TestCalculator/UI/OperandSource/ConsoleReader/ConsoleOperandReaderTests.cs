@@ -7,7 +7,7 @@ using NSubstitute.Core;
 
 namespace TestCalculator.UI.OperandSource.ConsoleReader;
 
-public class ConsoleOperandReaderTest
+public class ConsoleOperandReaderTests
 {
     [Test]
     public void WillReturnDoubleWhenProvidedWithCorrectNumericString()

@@ -50,6 +50,7 @@ public class Calculator(
         var leftOperandReader = operandSourceReaderFactory.Create(operandSourceChoice);
 
         var leftOperand = leftOperandReader.ReadOperand();
+        double rightOperand = 0;
 
         OperationSelectionRenderer.Render(operationSelection);
         var operationChoice = choiceReader.GetChoice<OperationChoice>();
@@ -63,7 +64,7 @@ public class Calculator(
             var secondOperandSourceChoice = choiceReader.GetChoice<OperandSources>();
             var rightOperandReader = operandSourceReaderFactory.Create(secondOperandSourceChoice);
 
-            var rightOperand = rightOperandReader.ReadOperand();
+            rightOperand = rightOperandReader.ReadOperand();
             result = Operation.Perform(operationType, leftOperand, rightOperand);
         }
         else
@@ -71,7 +72,15 @@ public class Calculator(
             result = Operation.Perform(operationType, leftOperand);
         }
 
-        Console.WriteLine(result);
+        _resultHistory.Add(result);
+
+        if (operationType.RequiresTwoOperands())
+            Console.WriteLine(
+                $"Your result: {leftOperand} {OperationTypeToPresentationMapper.Map(operationType)} {rightOperand} = {result}");
+        else
+            Console.WriteLine(
+                $"Your result: {OperationTypeToPresentationMapper.Map(operationType)} {leftOperand} = {result}");
+
         keyAwaiter.Wait();
     }
 
