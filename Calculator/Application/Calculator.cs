@@ -49,6 +49,7 @@ public class Calculator(
         var operandSourceChoice = choiceReader.GetChoice<OperandSources>();
         var leftOperandReader = operandSourceReaderFactory.Create(operandSourceChoice);
 
+        Console.WriteLine("Enter operand:");
         var leftOperand = leftOperandReader.ReadOperand();
         double rightOperand = 0;
 
@@ -64,7 +65,20 @@ public class Calculator(
             var secondOperandSourceChoice = choiceReader.GetChoice<OperandSources>();
             var rightOperandReader = operandSourceReaderFactory.Create(secondOperandSourceChoice);
 
-            rightOperand = rightOperandReader.ReadOperand();
+            if (operationType == OperationTypes.Division)
+            {
+                Console.WriteLine("Enter operand other than 0:");
+                do
+                {
+                    rightOperand = rightOperandReader.ReadOperand();
+                } while (rightOperand == 0);
+            }
+            else
+            {
+                Console.WriteLine("Enter operand:");
+                rightOperand = rightOperandReader.ReadOperand();
+            }
+
             result = Operation.Perform(operationType, leftOperand, rightOperand);
         }
         else
@@ -75,11 +89,11 @@ public class Calculator(
         _resultHistory.Add(result);
 
         if (operationType.RequiresTwoOperands())
-            Console.WriteLine(
-                $"Your result: {leftOperand} {OperationTypeToPresentationMapper.Map(operationType)} {rightOperand} = {result}");
+            Console.WriteLine("Your result: {0:0.##} {1} {2:0.##} = {3:0.##}", leftOperand,
+                OperationTypeToPresentationMapper.Map(operationType), rightOperand, result);
         else
-            Console.WriteLine(
-                $"Your result: {OperationTypeToPresentationMapper.Map(operationType)} {leftOperand} = {result}");
+            Console.WriteLine("Your result: {1} {0:0.##} = {2:0.##}", leftOperand,
+                OperationTypeToPresentationMapper.Map(operationType), result);
 
         keyAwaiter.Wait();
     }

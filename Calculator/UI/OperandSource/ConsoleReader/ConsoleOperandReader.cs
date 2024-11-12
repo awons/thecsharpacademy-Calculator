@@ -6,7 +6,6 @@ public class ConsoleOperandReader(IConsoleWrapper consoleWrapper, IKeyAwaiter ke
 {
     public double ReadOperand()
     {
-        Console.WriteLine("Enter operand:");
         var positionLeft = Console.CursorLeft;
         var positionTop = Console.CursorTop;
         while (true)
