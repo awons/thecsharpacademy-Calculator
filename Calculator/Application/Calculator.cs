@@ -16,6 +16,7 @@ public class Calculator(
     OperandSourceReaderFactory operandSourceReaderFactory)
 {
     private ResultHistory _resultHistory = new();
+    private int _usedCount;
 
     public void Run()
     {
@@ -23,6 +24,7 @@ public class Calculator(
         do
         {
             Console.Clear();
+            Console.WriteLine($"You used the calculator {_usedCount} times.");
             MenuRenderer.Render(mainMenu);
             var menuChoice = choiceReader.GetChoice<MenuChoices>();
             switch (menuChoice)
@@ -45,8 +47,18 @@ public class Calculator(
     private void RunCalculation()
     {
         Console.Clear();
-        OperandSourceSelectionRenderer.Render(operandSourceSelection);
-        var operandSourceChoice = choiceReader.GetChoice<OperandSources>();
+
+        OperandSources operandSourceChoice;
+        if (_usedCount != 0)
+        {
+            OperandSourceSelectionRenderer.Render(operandSourceSelection);
+            operandSourceChoice = choiceReader.GetChoice<OperandSources>();
+        }
+        else
+        {
+            operandSourceChoice = OperandSources.Console;
+        }
+
         var leftOperandReader = operandSourceReaderFactory.Create(operandSourceChoice);
 
         Console.WriteLine("Enter operand:");
@@ -54,15 +66,24 @@ public class Calculator(
         double rightOperand = 0;
 
         OperationSelectionRenderer.Render(operationSelection);
-        var operationChoice = choiceReader.GetChoice<OperationChoice>();
 
+        var operationChoice = choiceReader.GetChoice<OperationChoice>();
         var operationType = OperationUiToLogicMapper.Map(operationChoice);
 
         double result;
         if (operationType.RequiresTwoOperands())
         {
-            OperandSourceSelectionRenderer.Render(operandSourceSelection);
-            var secondOperandSourceChoice = choiceReader.GetChoice<OperandSources>();
+            OperandSources secondOperandSourceChoice;
+            if (_usedCount != 0)
+            {
+                OperandSourceSelectionRenderer.Render(operandSourceSelection);
+                secondOperandSourceChoice = choiceReader.GetChoice<OperandSources>();
+            }
+            else
+            {
+                secondOperandSourceChoice = OperandSources.Console;
+            }
+
             var rightOperandReader = operandSourceReaderFactory.Create(secondOperandSourceChoice);
 
             if (operationType == OperationTypes.Division)
@@ -105,6 +126,7 @@ public class Calculator(
                     OperationTypeToPresentationMapper.Map(operationType), result);
         }
 
+        _usedCount++;
         keyAwaiter.Wait();
     }
 
