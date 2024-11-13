@@ -1,7 +1,6 @@
 using Calculator.Logic;
-using Calculator.UI.Operation;
 
-namespace Calculator.Application;
+namespace Calculator.UI.Operation;
 
 public static class OperationTypeToPresentationMapper
 {

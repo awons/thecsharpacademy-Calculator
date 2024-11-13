@@ -1,8 +1,8 @@
-using Calculator.Application;
 using Calculator.Logic;
+using Calculator.UI.Operation;
 using FluentAssertions;
 
-namespace TestCalculator.Application;
+namespace TestCalculator.UI.Operation;
 
 public class OperationTypeToPresentationMapperTests
 {

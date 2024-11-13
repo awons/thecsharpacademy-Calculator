@@ -1,16 +1,20 @@
+using Calculator.ConsoleWrapper;
+using Calculator.Logic;
 using Calculator.UI.OperandSource.ConsoleReader;
+using Calculator.UI.OperandSource.HistoryReader;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Calculator.UI.OperandSource;
 
-public class OperandSourceReaderFactory(Func<IEnumerable<IOperandReader>> factory)
+public class OperandSourceReaderFactory(IServiceProvider serviceProvider)
 {
-    public IOperandReader Create(OperandSources source)
+    public IOperandReader Create(OperandSources source, Operations operations)
     {
-        var set = factory();
         return source switch
         {
-            OperandSources.Console => set.Where(x => x.GetType() == typeof(ConsoleOperandReader)).First(),
-            OperandSources.History => throw new NotImplementedException(),
+            OperandSources.Console => serviceProvider.GetService<ConsoleOperandReader>()!,
+            OperandSources.History => new HistoryOperandReader(operations,
+                serviceProvider.GetService<IConsoleWrapper>()!),
             _ => throw new ArgumentOutOfRangeException()
         };
     }

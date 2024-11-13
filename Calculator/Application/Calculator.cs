@@ -58,7 +58,7 @@ public class Calculator(
             operandSourceChoice = OperandSources.Console;
         }
 
-        var leftOperandReader = operandSourceReaderFactory.Create(operandSourceChoice);
+        var leftOperandReader = operandSourceReaderFactory.Create(operandSourceChoice, _performedOperations);
 
         Console.WriteLine("Enter operand:");
         var leftOperand = leftOperandReader.ReadOperand();
@@ -83,7 +83,7 @@ public class Calculator(
                 secondOperandSourceChoice = OperandSources.Console;
             }
 
-            var rightOperandReader = operandSourceReaderFactory.Create(secondOperandSourceChoice);
+            var rightOperandReader = operandSourceReaderFactory.Create(secondOperandSourceChoice, _performedOperations);
 
             if (operationType == OperationType.Division)
             {
