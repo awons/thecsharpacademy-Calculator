@@ -2,12 +2,12 @@ namespace Calculator.Logic;
 
 public static class OperationTypesExtension
 {
-    public static bool RequiresTwoOperands(this OperationTypes operationType)
+    public static bool RequiresTwoOperands(this OperationType operationType)
     {
-        if (operationType == OperationTypes.Addition || operationType == OperationTypes.Subtraction
-                                                     || operationType == OperationTypes.Multiplication ||
-                                                     operationType == OperationTypes.Division
-                                                     || operationType == OperationTypes.Power)
+        if (operationType == OperationType.Addition || operationType == OperationType.Subtraction
+                                                    || operationType == OperationType.Multiplication ||
+                                                    operationType == OperationType.Division
+                                                    || operationType == OperationType.Power)
             return true;
 
         return false;

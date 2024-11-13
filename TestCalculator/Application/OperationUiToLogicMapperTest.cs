@@ -10,15 +10,15 @@ public class OperationUiToLogicMapperTest
     [Test]
     public void WillMapFromUiToLogic()
     {
-        OperationUiToLogicMapper.Map(OperationChoice.Addition).Should().Be(OperationTypes.Addition);
-        OperationUiToLogicMapper.Map(OperationChoice.Subtraction).Should().Be(OperationTypes.Subtraction);
-        OperationUiToLogicMapper.Map(OperationChoice.Multiplication).Should().Be(OperationTypes.Multiplication);
-        OperationUiToLogicMapper.Map(OperationChoice.Division).Should().Be(OperationTypes.Division);
-        OperationUiToLogicMapper.Map(OperationChoice.Power).Should().Be(OperationTypes.Power);
-        OperationUiToLogicMapper.Map(OperationChoice.SquareRoot).Should().Be(OperationTypes.SquareRoot);
-        OperationUiToLogicMapper.Map(OperationChoice.X10).Should().Be(OperationTypes.X10);
-        OperationUiToLogicMapper.Map(OperationChoice.Sine).Should().Be(OperationTypes.Sine);
-        OperationUiToLogicMapper.Map(OperationChoice.Tangent).Should().Be(OperationTypes.Tangent);
-        OperationUiToLogicMapper.Map(OperationChoice.Cotangent).Should().Be(OperationTypes.Cotangent);
+        OperationUiToLogicMapper.Map(OperationChoice.Addition).Should().Be(OperationType.Addition);
+        OperationUiToLogicMapper.Map(OperationChoice.Subtraction).Should().Be(OperationType.Subtraction);
+        OperationUiToLogicMapper.Map(OperationChoice.Multiplication).Should().Be(OperationType.Multiplication);
+        OperationUiToLogicMapper.Map(OperationChoice.Division).Should().Be(OperationType.Division);
+        OperationUiToLogicMapper.Map(OperationChoice.Power).Should().Be(OperationType.Power);
+        OperationUiToLogicMapper.Map(OperationChoice.SquareRoot).Should().Be(OperationType.SquareRoot);
+        OperationUiToLogicMapper.Map(OperationChoice.X10).Should().Be(OperationType.X10);
+        OperationUiToLogicMapper.Map(OperationChoice.Sine).Should().Be(OperationType.Sine);
+        OperationUiToLogicMapper.Map(OperationChoice.Tangent).Should().Be(OperationType.Tangent);
+        OperationUiToLogicMapper.Map(OperationChoice.Cotangent).Should().Be(OperationType.Cotangent);
     }
 }

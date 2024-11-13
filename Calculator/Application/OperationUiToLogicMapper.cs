@@ -5,21 +5,21 @@ namespace Calculator.Application;
 
 public static class OperationUiToLogicMapper
 {
-    public static OperationTypes Map(OperationChoice uiChoice)
+    public static OperationType Map(OperationChoice uiChoice)
     {
         return uiChoice switch
         {
-            OperationChoice.Addition => OperationTypes.Addition,
-            OperationChoice.Subtraction => OperationTypes.Subtraction,
-            OperationChoice.Multiplication => OperationTypes.Multiplication,
-            OperationChoice.Division => OperationTypes.Division,
-            OperationChoice.Power => OperationTypes.Power,
-            OperationChoice.SquareRoot => OperationTypes.SquareRoot,
-            OperationChoice.X10 => OperationTypes.X10,
-            OperationChoice.Sine => OperationTypes.Sine,
-            OperationChoice.Cosine => OperationTypes.Cosine,
-            OperationChoice.Tangent => OperationTypes.Tangent,
-            OperationChoice.Cotangent => OperationTypes.Cotangent,
+            OperationChoice.Addition => OperationType.Addition,
+            OperationChoice.Subtraction => OperationType.Subtraction,
+            OperationChoice.Multiplication => OperationType.Multiplication,
+            OperationChoice.Division => OperationType.Division,
+            OperationChoice.Power => OperationType.Power,
+            OperationChoice.SquareRoot => OperationType.SquareRoot,
+            OperationChoice.X10 => OperationType.X10,
+            OperationChoice.Sine => OperationType.Sine,
+            OperationChoice.Cosine => OperationType.Cosine,
+            OperationChoice.Tangent => OperationType.Tangent,
+            OperationChoice.Cotangent => OperationType.Cotangent,
             _ => throw new ArgumentOutOfRangeException()
         };
     }

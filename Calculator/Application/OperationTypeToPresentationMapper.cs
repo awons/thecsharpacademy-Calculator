@@ -5,21 +5,21 @@ namespace Calculator.Application;
 
 public static class OperationTypeToPresentationMapper
 {
-    public static string Map(OperationTypes operationTypes)
+    public static string Map(OperationType operationType)
     {
-        return operationTypes switch
+        return operationType switch
         {
-            OperationTypes.Addition => OperationTypePresentation.Addition,
-            OperationTypes.Subtraction => OperationTypePresentation.Subtraction,
-            OperationTypes.Multiplication => OperationTypePresentation.Multiplication,
-            OperationTypes.Division => OperationTypePresentation.Division,
-            OperationTypes.SquareRoot => OperationTypePresentation.SquareRoot,
-            OperationTypes.Power => OperationTypePresentation.Power,
-            OperationTypes.X10 => OperationTypePresentation.X10,
-            OperationTypes.Sine => OperationTypePresentation.Sine,
-            OperationTypes.Cosine => OperationTypePresentation.Cosine,
-            OperationTypes.Tangent => OperationTypePresentation.Tangent,
-            OperationTypes.Cotangent => OperationTypePresentation.Cotangent,
+            OperationType.Addition => OperationTypePresentation.Addition,
+            OperationType.Subtraction => OperationTypePresentation.Subtraction,
+            OperationType.Multiplication => OperationTypePresentation.Multiplication,
+            OperationType.Division => OperationTypePresentation.Division,
+            OperationType.SquareRoot => OperationTypePresentation.SquareRoot,
+            OperationType.Power => OperationTypePresentation.Power,
+            OperationType.X10 => OperationTypePresentation.X10,
+            OperationType.Sine => OperationTypePresentation.Sine,
+            OperationType.Cosine => OperationTypePresentation.Cosine,
+            OperationType.Tangent => OperationTypePresentation.Tangent,
+            OperationType.Cotangent => OperationTypePresentation.Cotangent,
             _ => throw new ArgumentOutOfRangeException()
         };
     }

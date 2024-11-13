@@ -1,6 +1,6 @@
 namespace Calculator.Logic;
 
-public enum OperationTypes
+public enum OperationType
 {
     Addition,
     Subtraction,

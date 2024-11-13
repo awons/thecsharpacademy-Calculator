@@ -15,8 +15,7 @@ public class Calculator(
     OperationSelection operationSelection,
     OperandSourceReaderFactory operandSourceReaderFactory)
 {
-    private ResultHistory _resultHistory = new();
-    private int _usedCount;
+    private Operations _performedOperations = new();
 
     public void Run()
     {
@@ -24,7 +23,7 @@ public class Calculator(
         do
         {
             Console.Clear();
-            Console.WriteLine($"You used the calculator {_usedCount} times.");
+            Console.WriteLine($"You used the calculator {_performedOperations.Count} times.");
             MenuRenderer.Render(mainMenu);
             var menuChoice = choiceReader.GetChoice<MenuChoices>();
             switch (menuChoice)
@@ -49,7 +48,7 @@ public class Calculator(
         Console.Clear();
 
         OperandSources operandSourceChoice;
-        if (_usedCount != 0)
+        if (_performedOperations.Count != 0)
         {
             OperandSourceSelectionRenderer.Render(operandSourceSelection);
             operandSourceChoice = choiceReader.GetChoice<OperandSources>();
@@ -74,7 +73,7 @@ public class Calculator(
         if (operationType.RequiresTwoOperands())
         {
             OperandSources secondOperandSourceChoice;
-            if (_usedCount != 0)
+            if (_performedOperations.Count != 0)
             {
                 OperandSourceSelectionRenderer.Render(operandSourceSelection);
                 secondOperandSourceChoice = choiceReader.GetChoice<OperandSources>();
@@ -86,7 +85,7 @@ public class Calculator(
 
             var rightOperandReader = operandSourceReaderFactory.Create(secondOperandSourceChoice);
 
-            if (operationType == OperationTypes.Division)
+            if (operationType == OperationType.Division)
             {
                 Console.WriteLine("Enter operand other than 0:");
                 do
@@ -100,40 +99,47 @@ public class Calculator(
                 rightOperand = rightOperandReader.ReadOperand();
             }
 
-            result = Operation.Perform(operationType, leftOperand, rightOperand);
+            result = OperationExecutor.Perform(operationType, leftOperand, rightOperand);
         }
         else
         {
-            result = Operation.Perform(operationType, leftOperand);
+            result = OperationExecutor.Perform(operationType, leftOperand);
         }
-
-        _resultHistory.Add(result);
 
         if (operationType.RequiresTwoOperands())
         {
             if (double.IsNaN(result))
+            {
                 Console.WriteLine("{0:0.##} {1} {2:0.##} - This operation will result in an error");
+            }
             else
+            {
+                _performedOperations.Add(new Operation(leftOperand, operationType, result, rightOperand));
                 Console.WriteLine("Your result: {0:0.##} {1} {2:0.##} = {3:0.##}", leftOperand,
                     OperationTypeToPresentationMapper.Map(operationType), rightOperand, result);
+            }
         }
         else
         {
             if (double.IsNaN(result))
+            {
                 Console.WriteLine("{1} {0:0.##} - This operation will result in an error");
+            }
             else
+            {
+                _performedOperations.Add(new Operation(leftOperand, operationType, result));
                 Console.WriteLine("Your result: {1} {0:0.##} = {2:0.##}", leftOperand,
                     OperationTypeToPresentationMapper.Map(operationType), result);
+            }
         }
 
-        _usedCount++;
         keyAwaiter.Wait();
     }
 
     private void ClearHistory()
     {
         Console.Clear();
-        _resultHistory.Clear();
+        _performedOperations.Clear();
         Console.WriteLine("History cleared. Press any key to continue...");
         keyAwaiter.Wait();
     }
