@@ -1,6 +1,6 @@
-using Calculator.ConsoleWrapper;
-using Calculator.UI;
-using Calculator.UI.OperandSource.ConsoleReader;
+using CalculatorLibrary.ConsoleWrapper;
+using CalculatorLibrary.UI;
+using CalculatorLibrary.UI.OperandSource.ConsoleReader;
 using FluentAssertions;
 using NSubstitute;
 using NSubstitute.Core;

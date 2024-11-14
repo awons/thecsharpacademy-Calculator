@@ -1,9 +1,9 @@
-using Calculator.ConsoleWrapper;
-using Calculator.Logic;
-using Calculator.UI.OperandSource.HistoryReader;
+using CalculatorLibrary.ConsoleWrapper;
+using CalculatorLibrary.Logic;
+using CalculatorLibrary.UI.OperandSource.HistoryReader;
 using FluentAssertions;
 using NSubstitute;
-using LogicOperation = Calculator.Logic.Operation;
+using LogicOperation = CalculatorLibrary.Logic.Operation;
 
 namespace TestCalculator.UI.OperandSource.HistoryReader;
 

@@ -1,5 +1,5 @@
-using Calculator.Logic;
-using Calculator.UI.Operation;
+using CalculatorLibrary.Logic;
+using CalculatorLibrary.UI.Operation;
 
 namespace Calculator.Application;
 

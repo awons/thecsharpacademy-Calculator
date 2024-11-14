@@ -1,6 +1,6 @@
 using Calculator.Application;
-using Calculator.Logic;
-using Calculator.UI.Operation;
+using CalculatorLibrary.Logic;
+using CalculatorLibrary.UI.Operation;
 using FluentAssertions;
 
 namespace TestCalculator.Application;

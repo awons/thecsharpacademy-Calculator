@@ -1,6 +1,6 @@
-using Calculator.ConsoleWrapper;
-using Calculator.UI.ChoiceReader;
-using Calculator.UI.Menu;
+using CalculatorLibrary.ConsoleWrapper;
+using CalculatorLibrary.UI.ChoiceReader;
+using CalculatorLibrary.UI.Menu;
 using FluentAssertions;
 using NSubstitute;
 

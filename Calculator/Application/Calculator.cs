@@ -1,9 +1,9 @@
-using Calculator.Logic;
-using Calculator.UI;
-using Calculator.UI.ChoiceReader;
-using Calculator.UI.Menu;
-using Calculator.UI.OperandSource;
-using Calculator.UI.Operation;
+using CalculatorLibrary.Logic;
+using CalculatorLibrary.UI;
+using CalculatorLibrary.UI.ChoiceReader;
+using CalculatorLibrary.UI.Menu;
+using CalculatorLibrary.UI.OperandSource;
+using CalculatorLibrary.UI.Operation;
 
 namespace Calculator.Application;
 
