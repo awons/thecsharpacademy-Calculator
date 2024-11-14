@@ -1,3 +1,4 @@
+using System.Text;
 using CalculatorLibrary.ConsoleWrapper;
 using CalculatorLibrary.UI;
 using CalculatorLibrary.UI.OperandSource.ConsoleReader;
@@ -22,6 +23,9 @@ public class ConsoleOperandReaderTests
     [Test]
     public void WillKeepAskingForInputUntilValidProvided()
     {
+        var consoleOutputWriter = new StringWriter(new StringBuilder());
+        Console.SetOut(consoleOutputWriter);
+
         var consoleWrapper = Substitute.For<IConsoleWrapper>();
         consoleWrapper.ReadLine().Returns("a", "ab", "22.a", "45.5");
         var keyAwaiter = Substitute.For<IKeyAwaiter>();
