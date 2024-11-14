@@ -4,7 +4,6 @@ using CalculatorLibrary.UI;
 using CalculatorLibrary.UI.OperandSource.ConsoleReader;
 using FluentAssertions;
 using NSubstitute;
-using NSubstitute.Core;
 
 namespace TestCalculator.UI.OperandSource.ConsoleReader;
 
