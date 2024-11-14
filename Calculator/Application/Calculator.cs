@@ -48,15 +48,11 @@ public class Calculator(
         Console.Clear();
 
         OperandSources operandSourceChoice;
-        if (_performedOperations.Count != 0)
+        OperandSourceSelectionRenderer.Render(operandSourceSelection);
+        do
         {
-            OperandSourceSelectionRenderer.Render(operandSourceSelection);
             operandSourceChoice = choiceReader.GetChoice<OperandSources>();
-        }
-        else
-        {
-            operandSourceChoice = OperandSources.Console;
-        }
+        } while (operandSourceChoice == OperandSources.History && _performedOperations.Count == 0);
 
         var leftOperandReader = operandSourceReaderFactory.Create(operandSourceChoice, _performedOperations);
 
@@ -73,15 +69,11 @@ public class Calculator(
         if (operationType.RequiresTwoOperands())
         {
             OperandSources secondOperandSourceChoice;
-            if (_performedOperations.Count != 0)
+            OperandSourceSelectionRenderer.Render(operandSourceSelection);
+            do
             {
-                OperandSourceSelectionRenderer.Render(operandSourceSelection);
                 secondOperandSourceChoice = choiceReader.GetChoice<OperandSources>();
-            }
-            else
-            {
-                secondOperandSourceChoice = OperandSources.Console;
-            }
+            } while (secondOperandSourceChoice == OperandSources.History && _performedOperations.Count == 0);
 
             var rightOperandReader = operandSourceReaderFactory.Create(secondOperandSourceChoice, _performedOperations);
 
