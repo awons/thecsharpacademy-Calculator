@@ -4,13 +4,22 @@ using Calculator.UI.ChoiceReader;
 using Calculator.UI.Menu;
 using Calculator.UI.OperandSource;
 using Calculator.UI.OperandSource.ConsoleReader;
+using Calculator.UI.OperandSource.SpeechReader;
 using Calculator.UI.Operation;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = Host.CreateDefaultBuilder()
-    .ConfigureServices((services) =>
+    .ConfigureAppConfiguration(configurationBuilder =>
     {
+        configurationBuilder.SetBasePath(Directory.GetCurrentDirectory())
+            .AddUserSecrets<Program>();
+    })
+    .ConfigureServices((context, services) =>
+    {
+        services.Configure<SpeechRecognizerFactoryOptions>(
+            context.Configuration.GetSection(SpeechRecognizerFactoryOptions.Key));
         services.AddSingleton<MainMenu>();
         services.AddSingleton<IConsoleWrapper, ConsoleWrapper>();
         services.AddSingleton<IChoiceReader, ConsoleChoiceReader>();

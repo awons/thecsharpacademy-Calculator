@@ -6,6 +6,7 @@ public class OperandSourceSelection
     {
         return $@"{Convert.ToChar(OperandSources.Console)}: Console
 {Convert.ToChar(OperandSources.History)}: History
+{Convert.ToChar(OperandSources.Speech)}: Speech
 ";
     }
 }
