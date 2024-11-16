@@ -1,17 +1,16 @@
 using CalculatorLibrary.Logic;
-using LogicOperation = CalculatorLibrary.Logic.Operation;
 
 namespace CalculatorLibrary.UI.Operation;
 
 public static class OperationRenderer
 {
-    public static void Render(LogicOperation operation)
+    public static void Render(OperationDetails operationDetails)
     {
-        if (operation.OperationType.RequiresTwoOperands())
+        if (operationDetails.OperationType.RequiresTwoOperands())
             Console.Write(
-                $"{operation.LeftOperand} {OperationTypeToPresentationMapper.Map(operation.OperationType)} {operation.RightOperand} = {operation.Result}");
+                $"{operationDetails.LeftOperand} {OperationTypeToPresentationMapper.Map(operationDetails.OperationType)} {operationDetails.RightOperand} = {operationDetails.Result}");
         else
             Console.Write(
-                $"{OperationTypeToPresentationMapper.Map(operation.OperationType)} {operation.LeftOperand} = {operation.Result}");
+                $"{OperationTypeToPresentationMapper.Map(operationDetails.OperationType)} {operationDetails.LeftOperand} = {operationDetails.Result}");
     }
 }

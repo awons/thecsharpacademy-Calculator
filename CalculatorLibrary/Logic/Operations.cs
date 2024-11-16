@@ -1,5 +1,5 @@
 namespace CalculatorLibrary.Logic;
 
-public class Operations : List<Operation>
+public class Operations : List<OperationDetails>
 {
 }
