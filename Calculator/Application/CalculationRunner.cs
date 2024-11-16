@@ -36,6 +36,7 @@ public class CalculationRunner(
         OperationDetailsRenderer.Render(operationDetails);
         previousOperations.Add(operationDetails);
 
+        Console.WriteLine("Press any key to continue...");
         keyAwaiter.Wait();
     }
 
