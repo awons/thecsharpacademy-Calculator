@@ -11,7 +11,8 @@ public class CalculationRunner(
     OperationSelection operationSelection,
     OperandSourceReaderFactory operandSourceReaderFactory,
     IChoiceReader choiceReader,
-    IKeyAwaiter keyAwaiter)
+    IKeyAwaiter keyAwaiter,
+    OperationLogWriter operationLogWriter)
 {
     public void Run(Operations previousOperations)
     {
@@ -33,6 +34,7 @@ public class CalculationRunner(
             operationDetails = new OperationDetails(leftOperand, operationType, result);
         }
 
+        operationLogWriter.Log(operationDetails);
         OperationDetailsRenderer.Render(operationDetails);
         previousOperations.Add(operationDetails);
 

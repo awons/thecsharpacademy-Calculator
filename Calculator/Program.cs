@@ -28,8 +28,11 @@ var builder = Host.CreateDefaultBuilder()
         services.AddSingleton<OperationSelection>();
         services.AddOperandSourceReaderFactory();
         services.AddSingleton<CalculationRunner>();
+        services.AddSingleton<OperationLogWriter>();
+        services.AddSingleton<Calculator.Application.Calculator>();
     });
 var host = builder.Build();
 
-var calculator = ActivatorUtilities.CreateInstance<Calculator.Application.Calculator>(host.Services);
+var calculator = host.Services.GetService<Calculator.Application.Calculator>()!;
 calculator.Run();
+host.Dispose();
